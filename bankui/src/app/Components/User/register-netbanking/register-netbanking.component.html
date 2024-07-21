@@ -1,0 +1,44 @@
+<!-- register-internet-banking.component.html -->
+<div class="container">
+    <h2>Register For Internet Banking</h2>
+    <p *ngIf="isServerError" class="text-center text-danger py-2">{{errorMessage}}</p>
+    <p *ngIf="isServerSuccess" class="text-center text-success py-2">{{successMessage}}</p>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="accountNumber">Account Number</label>
+            <input type="text" id="accountNumber" formControlName="accountNumber" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="loginPassword">Set Login Password</label>
+            <input type="password" id="loginPassword" formControlName="loginPassword" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="confirmLoginPassword">Confirm Login Password</label>
+            <input type="password" id="confirmLoginPassword" formControlName="confirmLoginPassword"
+                class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="transactionPassword">Set Transaction Password</label>
+            <input type="password" id="transactionPassword" formControlName="transactionPassword" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="confirmTransactionPassword">Confirm Transaction Password</label>
+            <input type="password" id="confirmTransactionPassword" formControlName="confirmTransactionPassword"
+                class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="otp">Enter OTP</label>
+            <input type="text" id="otp" formControlName="otp" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
+    </form>
+
+    <button class="btn btn-primary mb-4" (click)="requestForOtp()">Request for OTP to Email</button>
+    <p *ngIf="otpMessage">{{otpMessage}}</p>
+</div>

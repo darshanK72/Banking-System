@@ -1,0 +1,21 @@
+header {
+  background-color: #007bff;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #fff !important;
+  margin-left: 1rem;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+nav{
+  margin-bottom: 0 !important;
+}

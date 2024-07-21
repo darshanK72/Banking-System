@@ -1,0 +1,330 @@
+<!-- account-registration.component.html -->
+<div class="container mt-0">
+  <h2 class="mb-4">Open A Savings Account</h2>
+  <p *ngIf="isServerError" class="text-center text-danger py-2">{{errorMessage}}</p>
+  <p *ngIf="isServerSuccess" class="text-center text-success py-2">{{successMessage}}</p>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="card mb-4">
+      <div class="card-header">Personal Details</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="title" class="form-label">Title<span class="text-danger">*</span></label>
+            <select id="title" formControlName="title" class="form-select">
+              <option value="">Select</option>
+              <option value="Mr">Mr</option>
+              <option value="Ms">Ms</option>
+              <option value="Mrs">Mrs</option>
+            </select>
+            <div
+              *ngIf="registrationForm.get('title')?.invalid && (registrationForm.get('title')?.dirty || registrationForm.get('title')?.touched)"
+              class="text-danger">
+              Title is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="firstName" class="form-label">First Name<span class="text-danger">*</span></label>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control">
+            <div
+              *ngIf="registrationForm.get('firstName')?.invalid && (registrationForm.get('firstName')?.dirty || registrationForm.get('firstName')?.touched)"
+              class="text-danger">
+              First Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="middleName" class="form-label">Middle Name</label>
+            <input type="text" id="middleName" formControlName="middleName" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName" class="form-label">Last Name<span class="text-danger">*</span></label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control">
+            <div
+              *ngIf="registrationForm.get('lastName')?.invalid && (registrationForm.get('lastName')?.dirty || registrationForm.get('lastName')?.touched)"
+              class="text-danger">
+              Last Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="fathersName" class="form-label">Father's Name<span class="text-danger">*</span></label>
+            <input type="text" id="fathersName" formControlName="fathersName" class="form-control">
+            <div
+              *ngIf="registrationForm.get('fathersName')?.invalid && (registrationForm.get('fathersName')?.dirty || registrationForm.get('fathersName')?.touched)"
+              class="text-danger">
+              Father's Name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="mobileNumber" class="form-label">Mobile Number<span class="text-danger">*</span></label>
+            <input type="tel" id="mobileNumber" formControlName="mobileNumber" class="form-control">
+            <div
+              *ngIf="registrationForm.get('mobileNumber')?.invalid && (registrationForm.get('mobileNumber')?.dirty || registrationForm.get('mobileNumber')?.touched)"
+              class="text-danger">
+              Valid Mobile Number is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="emailId" class="form-label">Email ID</label>
+            <input type="email" id="emailId" formControlName="emailId" class="form-control">
+            <div
+              *ngIf="registrationForm.get('emailId')?.invalid && (registrationForm.get('emailId')?.dirty || registrationForm.get('emailId')?.touched)"
+              class="text-danger">
+              Valid Email ID is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="aadharCardNumber" class="form-label">Aadhar Card Number<span
+                class="text-danger">*</span></label>
+            <input type="text" id="aadharCardNumber" formControlName="aadharCardNumber" class="form-control">
+            <div
+              *ngIf="registrationForm.get('aadharCardNumber')?.invalid && (registrationForm.get('aadharCardNumber')?.dirty || registrationForm.get('aadharCardNumber')?.touched)"
+              class="text-danger">
+              Valid Aadhar Card Number is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="dateOfBirth" class="form-label">Date of Birth<span class="text-danger">*</span></label>
+            <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="form-control">
+            <div
+              *ngIf="registrationForm.get('dateOfBirth')?.invalid && (registrationForm.get('dateOfBirth')?.dirty || registrationForm.get('dateOfBirth')?.touched)"
+              class="text-danger">
+              Date of Birth is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Residential Address section -->
+    <div class="card mb-4">
+      <div class="card-header">Residential Address</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="addressLine1" class="form-label">Address Line 1<span class="text-danger">*</span></label>
+            <input type="text" id="addressLine1" formControlName="addressLine1" class="form-control">
+            <div
+              *ngIf="registrationForm.get('addressLine1')?.invalid && (registrationForm.get('addressLine1')?.dirty || registrationForm.get('addressLine1')?.touched)"
+              class="text-danger">
+              Address Line 1 is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="addressLine2" class="form-label">Address Line 2</label>
+            <input type="text" id="addressLine2" formControlName="addressLine2" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="landmark" class="form-label">Landmark</label>
+            <input type="text" id="landmark" formControlName="landmark" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="state" class="form-label">State<span class="text-danger">*</span></label>
+            <input type="text" id="state" formControlName="state" class="form-control">
+            <div
+              *ngIf="registrationForm.get('state')?.invalid && (registrationForm.get('state')?.dirty || registrationForm.get('state')?.touched)"
+              class="text-danger">
+              State is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="city" class="form-label">City<span class="text-danger">*</span></label>
+            <input type="text" id="city" formControlName="city" class="form-control">
+            <div
+              *ngIf="registrationForm.get('city')?.invalid && (registrationForm.get('city')?.dirty || registrationForm.get('city')?.touched)"
+              class="text-danger">
+              City is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="pincode" class="form-label">Pincode<span class="text-danger">*</span></label>
+            <input type="text" id="pincode" formControlName="pincode" class="form-control">
+            <div
+              *ngIf="registrationForm.get('pincode')?.invalid && (registrationForm.get('pincode')?.dirty || registrationForm.get('pincode')?.touched)"
+              class="text-danger">
+              Valid Pincode is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Permanent Address section -->
+    <div class="card mb-4">
+      <div class="card-header">Permanent Address</div>
+      <div class="card-body">
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="permanentAddressSameAsMailing"
+            formControlName="permanentAddressSameAsMailing" (change)="onPermanentAddressChange()">
+          <label class="form-check-label" for="permanentAddressSameAsMailing">
+            Permanent Address same as Mailing Address
+          </label>
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="permanentAddressLine1" class="form-label">Address Line 1<span
+                  class="text-danger">*</span></label>
+              <input type="text" id="permanentAddressLine1" formControlName="permanentAddressLine1"
+                class="form-control">
+              <div
+                *ngIf="registrationForm.get('permanentAddressLine1')?.invalid && (registrationForm.get('permanentAddressLine1')?.dirty || registrationForm.get('permanentAddressLine1')?.touched)"
+                class="text-danger">
+                Address Line 1 is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="permanentAddressLine2" class="form-label">Address Line 2</label>
+              <input type="text" id="permanentAddressLine2" formControlName="permanentAddressLine2"
+                class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="permanentLandmark" class="form-label">Landmark</label>
+              <input type="text" id="permanentLandmark" formControlName="permanentLandmark" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="permanentState" class="form-label">State<span class="text-danger">*</span></label>
+              <input type="text" id="permanentState" formControlName="permanentState" class="form-control">
+              <div
+                *ngIf="registrationForm.get('permanentState')?.invalid && (registrationForm.get('permanentState')?.dirty || registrationForm.get('permanentState')?.touched)"
+                class="text-danger">
+                State is required.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="permanentCity" class="form-label">City<span class="text-danger">*</span></label>
+              <input type="text" id="permanentCity" formControlName="permanentCity" class="form-control">
+              <div
+                *ngIf="registrationForm.get('permanentCity')?.invalid && (registrationForm.get('permanentCity')?.dirty || registrationForm.get('permanentCity')?.touched)"
+                class="text-danger">
+                City is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="permanentPincode" class="form-label">Pincode<span class="text-danger">*</span></label>
+              <input type="text" id="permanentPincode" formControlName="permanentPincode" class="form-control">
+              <div
+                *ngIf="registrationForm.get('permanentPincode')?.invalid && (registrationForm.get('permanentPincode')?.dirty || registrationForm.get('permanentPincode')?.touched)"
+                class="text-danger">
+                Valid Pincode is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Occupation Details section -->
+    <div class="card mb-4">
+      <div class="card-header">Occupation Details</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="occupationType" class="form-label">Occupation Type<span class="text-danger">*</span></label>
+            <select id="occupationType" formControlName="occupationType" class="form-select">
+              <option value="">Select</option>
+              <option value="Salaried">Salaried</option>
+              <option value="Self-Employed">Self-Employed</option>
+              <option value="Business">Business</option>
+              <option value="Student">Student</option>
+            </select>
+            <div
+              *ngIf="registrationForm.get('occupationType')?.invalid && (registrationForm.get('occupationType')?.dirty || registrationForm.get('occupationType')?.touched)"
+              class="text-danger">
+              Occupation Type is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="sourceOfIncome" class="form-label">Source of Income<span class="text-danger">*</span></label>
+            <select id="sourceOfIncome" formControlName="sourceOfIncome" class="form-select">
+              <option value="">Select</option>
+              <option value="Salary">Salary</option>
+              <option value="Business">Business</option>
+              <option value="Investments">Investments</option>
+            </select>
+            <div
+              *ngIf="registrationForm.get('sourceOfIncome')?.invalid && (registrationForm.get('sourceOfIncome')?.dirty || registrationForm.get('sourceOfIncome')?.touched)"
+              class="text-danger">
+              Source of Income is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="grossAnnualIncome" class="form-label">Gross Annual Income<span
+                class="text-danger">*</span></label>
+            <input type="number" id="grossAnnualIncome" formControlName="grossAnnualIncome" class="form-control">
+            <div
+              *ngIf="registrationForm.get('grossAnnualIncome')?.invalid && (registrationForm.get('grossAnnualIncome')?.dirty || registrationForm.get('grossAnnualIncome')?.touched)"
+              class="text-danger">
+              Gross Annual Income is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="accountType" class="form-label">Account Type<span class="text-danger">*</span></label>
+            <select id="accountType" formControlName="accountType" class="form-select">
+              <option value="">Select</option>
+              <option value="Salary">Savings Account</option>
+              <option value="Business">Current Account</option>
+              <option value="Investments">Fixed Deposite</option>
+            </select>
+            <div
+              *ngIf="registrationForm.get('accountType')?.invalid && (registrationForm.get('accountType')?.dirty || registrationForm.get('accountType')?.touched)"
+              class="text-danger">
+              Account Type is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Debit/ATM Card section -->
+    <div class="card mb-4">
+      <div class="card-header">Debit/ATM Card</div>
+      <div class="card-body">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="wantDebitCard" formControlName="wantDebitCard">
+          <label class="form-check-label" for="wantDebitCard">
+            Do you want a debit card?<span class="text-danger">*</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Net Banking and Agreement sections -->
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="optForNetBanking" formControlName="optForNetBanking">
+      <label class="form-check-label" for="optForNetBanking">
+        Opt for Net Banking
+      </label>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="agree" formControlName="agree">
+      <label class="form-check-label" for="agree">
+        I agree...<span class="text-danger">*</span>
+      </label>
+      <div
+        *ngIf="registrationForm.get('agree')?.invalid && (registrationForm.get('agree')?.dirty || registrationForm.get('agree')?.touched)"
+        class="text-danger">
+        You must agree to the terms.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">Submit</button>
+  </form>
+</div>

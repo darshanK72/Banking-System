@@ -1,0 +1,35 @@
+<!-- If account is present, show account highlights -->
+<div *ngIf="account != null">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Account Number</h5>
+                    <p class="card-text">{{ account.accountNumber }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Balance</h5>
+                    <p class="card-text">{{ account.balance | currency }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Account Type</h5>
+                    <p class="card-text">{{ account.accountType }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="account == null" class="open-account-container">
+    <h2>No Account Found</h2>
+    <p>Please open an account to access all features.</p>
+    <a class="btn btn-primary" routerLink="create-account">Open Account</a>
+</div>

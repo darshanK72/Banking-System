@@ -1,0 +1,82 @@
+<div class="container my-0">
+    <div class="card">
+      <div class="card-header">
+        <h4>Initiate {{ selectedPaymentType }} Payment</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+          <div class="form-group row my-2">
+            <label for="paymentType" class="col-3 col-form-label">Payment Type</label>
+            <div class="col-9">
+              <select id="paymentType" class="form-control" (change)="onPaymentTypeChange($event)">
+                <option *ngFor="let type of paymentTypes" [value]="type">{{ type }}</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="form-group row my-2">
+            <label for="fromAccount" class="col-3 col-form-label">From Account</label>
+            <div class="col-9">
+              <select id="fromAccount" formControlName="fromAccount" class="form-control">
+                <option *ngFor="let account of accounts" [value]="account.accountNumber">
+                  {{ account.accountNumber }} - {{ account.accountType }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row my-2">
+            <label for="toAccount" class="col-3 col-form-label">To Account</label>
+            <div class="col-9">
+              <div class="input-group">
+                <select id="toAccount" formControlName="toAccount" class="form-control">
+                    <option *ngFor="let payee of payees" [value]="payee.payeeAccountNumber">
+                      {{ payee.payeeAccountNumber }} - {{ payee.payeeName }}
+                    </option>
+                  </select>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary ms-2 my-0" type="button" (click)="addNewPayee()">Add New +</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group row my-2">
+            <label for="amount" class="col-3 col-form-label">Amount</label>
+            <div class="col-9">
+              <input type="number" id="amount" formControlName="amount" class="form-control">
+            </div>
+          </div>
+  
+          <div class="form-group row my-2">
+            <label for="transactionDate" class="col-3 col-form-label">Transaction Date</label>
+            <div class="col-9">
+              <input type="date" id="transactionDate" formControlName="transactionDate" class="form-control">
+            </div>
+          </div>
+  
+          <div class="form-group row my-2" *ngIf="selectedPaymentType !== 'NEFT'">
+            <label for="maturityInstructions" class="col-3 col-form-label">Maturity Instructions</label>
+            <div class="col-9">
+              <input type="text" id="maturityInstructions" formControlName="maturityInstructions" class="form-control">
+            </div>
+          </div>
+  
+          <div class="form-group row my-2">
+            <label for="remark" class="col-3 col-form-label">Remark</label>
+            <div class="col-9">
+              <input type="text" id="remark" formControlName="remark" class="form-control">
+            </div>
+          </div>
+  
+          <div class="form-group row my-2">
+            <div class="col-3"></div>
+            <div class="col-9">
+              <button type="submit" class="btn btn-primary me-2">Send</button>
+              <button type="reset" class="btn btn-secondary me-2">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

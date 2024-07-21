@@ -1,0 +1,66 @@
+<div class="container my-0">
+    <div class="card">
+      <div class="card-header">
+        <h4>{{ editMode ? 'Edit Beneficiary' : 'Add New Beneficiary' }}</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="payeeForm" (ngSubmit)="onSave()">
+          <div class="form-group row my-2">
+            <label for="beneficiaryName" class="col-3 col-form-label">Beneficiary Name</label>
+            <div class="col-9">
+              <input type="text" id="beneficiaryName" formControlName="beneficiaryName" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label for="beneficiaryAccountNumber" class="col-3 col-form-label">Beneficiary Account Number</label>
+            <div class="col-9">
+              <input type="text" id="beneficiaryAccountNumber" formControlName="beneficiaryAccountNumber" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <label for="reEnterAccountNumber" class="col-3 col-form-label">Re-Enter Account Number</label>
+            <div class="col-9">
+              <input type="text" id="reEnterAccountNumber" formControlName="reEnterAccountNumber" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group row my-2">
+            <div class="col-3"></div>
+            <div class="col-9">
+              <button type="submit" class="btn btn-primary" [disabled]="payeeForm.invalid">{{ editMode ? 'Update Beneficiary' : 'Save As Beneficiary' }}</button>
+              <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <div class="card my-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4>Beneficiary List</h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Account Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let payee of payees; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ payee.payeeName }}</td>
+              <td>{{ payee.payeeAccountNumber }}</td>
+              <td>
+                <button class="btn btn-info me-2" (click)="onEdit(payee)">Edit</button>
+                <button class="btn btn-danger" (click)="onDelete(payee.payeeId)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

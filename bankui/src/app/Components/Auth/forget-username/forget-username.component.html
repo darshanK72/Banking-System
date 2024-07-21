@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="login-container">
+      <h2>Forget Username</h2>
+      <p *ngIf="isServerError" class="text-center text-danger py-2">{{errorMessage}}</p>
+      <p *ngIf="isServerSuccess" class="text-center text-success py-2">{{successMessage}}</p>
+      <form [formGroup]="forgetForm" (ngSubmit)="forgetUsername()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" formControlName="email">
+          <div *ngIf="forgetForm.get('email')!.invalid && forgetForm.get('email')!.touched"
+            class="error-message">
+            Email is required.
+          </div>
+        </div>
+  
+        <button type="submit" [disabled]="forgetForm.invalid">Submit</button>
+      </form>
+      <div class="mt-2">
+        <a routerLink="/forget-password">Forget Password? Click Here</a>
+      </div>
+    </div>
+  
+  </div>

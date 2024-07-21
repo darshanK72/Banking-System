@@ -1,0 +1,15 @@
+.footer {
+    background-color: #007bff;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    color: #fff !important;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

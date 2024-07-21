@@ -1,0 +1,26 @@
+.card {
+    margin-bottom: 20px;
+  }
+  
+  .card-header {
+    background-color: #f8f9fa;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .col-form-label {
+      text-align: left;
+    }
+    
+    .btn {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }

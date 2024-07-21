@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="login-container my-5">
+    <h2>Login</h2>
+    <p *ngIf="isServerError" class="text-center text-danger py-2">{{errorMessage}}</p>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="usernameOrEmail">Username OR Email</label>
+        <input type="text" id="usernameOrEmail" formControlName="usernameOrEmail">
+        <div *ngIf="loginForm.get('usernameOrEmail')!.invalid && loginForm.get('usernameOrEmail')!.touched"
+          class="error-message">
+          Username OR Email is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+        <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" class="error-message">
+          Password is required.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+    <div class="mt-2">
+      <a routerLink="/signup">New User? Register Here</a>
+      <a routerLink="/forget-username">Forget Username? Clck Here</a>
+      <a routerLink="/forget-password">Forget Password? Click Here</a>
+    </div>
+  </div>
+
+</div>

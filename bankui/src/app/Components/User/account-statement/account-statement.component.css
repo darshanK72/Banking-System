@@ -1,0 +1,18 @@
+/* account-statement.component.css */
+
+.table th, .table td {
+    text-align: center;
+  }
+  
+  .text-success {
+    color: green;
+  }
+  
+  .text-danger {
+    color: red;
+  }
+  
+  .btn-info {
+    font-size: 0.875rem;
+  }
+  

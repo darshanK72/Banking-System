@@ -1,0 +1,34 @@
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="list-group list-group-flush">
+      <a href="#" *ngIf="account == null" class="list-group-item list-group-item-action bg-light text-dark" routerLink="user-home">
+        Home
+      </a>
+      <a href="#" *ngIf="account == null" class="list-group-item list-group-item-action bg-light text-dark" routerLink="create-account">
+        Open Account
+      </a>
+      <a *ngIf="account != null && !toRegisterForBanking" href="#" class="list-group-item list-group-item-action bg-light text-dark" routerLink="register-netbanking">
+        Register for Net Banking
+      </a>
+      <a *ngIf="account != null" href="#" class="list-group-item list-group-item-action bg-light text-dark" routerLink="account-statement">
+        Account Statement
+      </a>
+      <a *ngIf="account != null" href="#" class="list-group-item list-group-item-action bg-light text-dark" routerLink="account-summary">
+        Account Summary
+      </a>
+      <a *ngIf="account != null" href="#" class="list-group-item list-group-item-action bg-light text-dark" routerLink="payee-list">
+        Beneficiaries
+      </a>
+      <a *ngIf="account != null" href="#" class="list-group-item list-group-item-action bg-light text-dark" routerLink="funds-transfer">
+        Funds Transfer
+      </a>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+  </div>
+</div>
