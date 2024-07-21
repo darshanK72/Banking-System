@@ -57,6 +57,7 @@ export class PayeeListComponent implements OnInit {
         payeeId: this.selectedPayeeId ? this.selectedPayeeId : 0,
         payeeName: this.payeeForm.get('beneficiaryName')?.value,
         payeeAccountNumber: this.payeeForm.get('beneficiaryAccountNumber')?.value,
+        userId:this.userId
       };
 
       if (this.editMode && this.selectedPayeeId !== null) {

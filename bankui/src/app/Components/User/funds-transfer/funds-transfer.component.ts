@@ -101,6 +101,7 @@ export class FundsTransferComponent implements OnInit {
         (response: TransactionResponse) => {
           if (response.success) {
             window.alert('Transaction successful: ' + response.message);
+            this.router.navigate(['/user-dashboard']);
             this.transferForm.reset();
           } else {
             window.alert('Transaction failed: ' + response.message);

@@ -1,130 +1,41 @@
-.admin-dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.styled-table {
+#wrapper {
+  display: flex;
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
 }
 
-.styled-table thead tr {
-  background-color: #009879;
-  color: #ffffff;
-  text-align: left;
-}
-
-.styled-table th, .styled-table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-}
-
-.styled-table tbody tr {
-  border-bottom: 1px solid #ddd;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
-}
-
-.action-button {
-  padding: 6px 12px;
-  margin: 2px;
-  border: none;
-  color: #fff;
-  background-color: #007bff;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.action-button:hover {
-  background-color: #0056b3;
-}
-
-.user-details {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.edit-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.edit-form input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-.form-button {
-  padding: 8px 16px;
-  margin-right: 10px;
-  border: none;
-  background-color: #28a745;
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.form-button:hover {
-  background-color: #218838;
-}
-
-.navbar {
+#sidebar-wrapper {
+  min-height: 100vh;
+  width: 250px;
   background-color: #343a40;
-  padding: 10px 20px;
 }
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.sidebar-heading {
+  padding: 1rem;
+  font-size: 1.5rem;
+  background-color: #c8dbf0;
 }
 
-.navbar-brand {
-  color: #fff;
-  font-size: 24px;
-  text-decoration: none;
+.list-group-item {
+  padding: 10px 1rem 8px 1rem;
 }
 
-.navbar-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
+#page-content-wrapper {
+  flex-grow: 1;
+  padding: 2rem;
 }
 
-.nav-item {
-  margin-left: 20px;
+@media (min-width: 768px) {
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+  }
 }
 
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-}
+@media (max-width: 768px) {
+  #sidebar-wrapper {
+    width: 100%;
+  }
 
-.nav-link:hover {
-  text-decoration: underline;
+  #page-content-wrapper {
+    padding: 1rem;
+  }
 }

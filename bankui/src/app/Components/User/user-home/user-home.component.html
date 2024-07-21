@@ -1,5 +1,5 @@
 <!-- If account is present, show account highlights -->
-<div *ngIf="account != null">
+<div *ngIf="account != null && isAccountApproved">
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -31,5 +31,10 @@
 <div *ngIf="account == null" class="open-account-container">
     <h2>No Account Found</h2>
     <p>Please open an account to access all features.</p>
-    <a class="btn btn-primary" routerLink="create-account">Open Account</a>
+    <a class="btn btn-primary" routerLink="../create-account">Open Account</a>
+</div>
+
+<div *ngIf="account != null && !isAccountApproved" class="open-account-container">
+    <h2>Your account is not approved yet.</h2>
+    <p>Please open wait for account to get approved.</p>
 </div>

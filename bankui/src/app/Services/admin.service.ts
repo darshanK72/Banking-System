@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Account } from '../Models/account.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = 'https://localhost:7035/api';
+  private apiUrl = 'https://localhost:7035/api/Admin';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/Users`);
+  getNotApprovedAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.apiUrl}/not-approved-accounts`);
   }
 
-  updateUser(user: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/Users/${user.id}`, user);
+  getAllAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.apiUrl}/all-accounts`);
   }
 
-  approveUser(userId: number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/Users/approve/${userId}`, {});
+  approveAccount(accountId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/approve-account/${accountId}`, {});
   }
 
-  deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/Users/${userId}`);
+  cancelAccount(accountId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/cancel-account/${accountId}`);
   }
 }

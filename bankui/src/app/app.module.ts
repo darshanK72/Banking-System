@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './Components/Auth/signup/signup.component';
@@ -22,6 +22,9 @@ import { RegisterNetbankingComponent } from './Components/User/register-netbanki
 import { UserHomeComponent } from './Components/User/user-home/user-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PayeeListComponent } from './Components/User/payee-list/payee-list.component';
+import { JwtInterceptor } from './Utils/jwt.interceptor';
+import { CommonModule } from '@angular/common';
+import { AccountRequestsComponent } from './Components/Admin/account-requests/account-requests.component';
 
 @NgModule({
   declarations: [
@@ -44,15 +47,19 @@ import { PayeeListComponent } from './Components/User/payee-list/payee-list.comp
     RegisterNetbankingComponent,
     UserHomeComponent,
     PayeeListComponent,
+    AccountRequestsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

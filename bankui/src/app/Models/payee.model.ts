@@ -6,4 +6,5 @@ export interface Payee {
   payeeAccountNumber: string;
   payeeAccountId?: number;
   payeeAccount?: Account;
+  userId?:number;
 }

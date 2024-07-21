@@ -1,80 +1,19 @@
-<div class="admin-dashboard">
-  <h1>Admin Dashboard</h1>
-
-  <table class="styled-table">
-    <thead>
-      <tr>
-        <th>UserName</th>
-        <th>Email</th>
-        <th>FullName</th>
-        <th>Address</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.userName }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.fullName }}</td>
-        <td>{{ user.address }}</td>
-        <td>
-          <button class="action-button" (click)="viewUserDetails(user)">View</button>
-          <button class="action-button" (click)="editUser(user)">Edit</button>
-          <button class="action-button" (click)="approveUser(user)">Approve</button>
-          <!-- Uncomment this line if you want delete functionality -->
-          <!-- <button class="action-button" (click)="deleteUser(user.id)">Delete</button> -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div *ngIf="selectedUser" class="user-details">
-    <h2>User Details</h2>
-    <form *ngIf="isEditing" (ngSubmit)="saveUser()" class="edit-form">
-      <label>
-        UserID:
-        <input [(ngModel)]="selectedUser.id" name="UserID" readonly>
-      </label>
-      <label>
-        UserName:
-        <input [(ngModel)]="selectedUser.userName" name="userName">
-      </label>
-      <label>
-        Email:
-        <input [(ngModel)]="selectedUser.email" name="email">
-      </label>
-      <label>
-        FullName:
-        <input [(ngModel)]="selectedUser.fullName" name="fullName">
-      </label>
-      <label>
-        Address:
-        <input [(ngModel)]="selectedUser.address" name="address">
-      </label>
-      <button type="submit" class="form-button">Save</button>
-      <button type="button" class="form-button" (click)="cancelEdit()">Cancel</button>
-    </form>
-
-    <div *ngIf="!isEditing">
-      <p><strong>UserName:</strong> {{ selectedUser.userName }}</p>
-      <p><strong>Email:</strong> {{ selectedUser.email }}</p>
-      <p><strong>FullName:</strong> {{ selectedUser.fullName }}</p>
-      <p><strong>Address:</strong> {{ selectedUser.address }}</p>
-      <button class="form-button" (click)="editUser(selectedUser)">Edit</button>
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action bg-light text-dark" routerLink="account-requests">
+        Account Opening Requests
+      </a>
+      <a class="list-group-item list-group-item-action bg-light text-dark" routerLink="account-list">
+        Accounts
+      </a>
     </div>
   </div>
-</div>
 
-<nav class="navbar">
-  <div class="navbar-container">
-    <a class="navbar-brand" href="#">Admin Dashboard</a>
-    <ul class="navbar-menu">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/create-account">Create Account</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/account-list">Get All Accounts</a>
-      </li>
-    </ul>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
   </div>
-</nav>
+</div>

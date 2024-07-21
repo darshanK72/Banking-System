@@ -1,0 +1,56 @@
+<div class="container my-0">
+    <div class="card" *ngIf="selectedAccount">
+      <div class="card-header">
+        <h4>Account Details</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Account Number:</strong> {{ selectedAccount.accountNumber }}</p>
+        <p><strong>Title:</strong> {{ selectedAccount.title }}</p>
+        <p><strong>Name:</strong> {{ selectedAccount.firstName }} {{ selectedAccount.middleName }} {{ selectedAccount.lastName }}</p>
+        <p><strong>Father's Name:</strong> {{ selectedAccount.fathersName }}</p>
+        <p><strong>Mobile Number:</strong> {{ selectedAccount.mobileNumber }}</p>
+        <p><strong>Email:</strong> {{ selectedAccount.emailId }}</p>
+        <p><strong>Aadhar Card Number:</strong> {{ selectedAccount.aadharCardNumber }}</p>
+        <p><strong>Date of Birth:</strong> {{ selectedAccount.dateOfBirth}}</p>
+        <p><strong>Occupation:</strong> {{ selectedAccount.occupationType }}</p>
+        <p><strong>Source of Income:</strong> {{ selectedAccount.sourceOfIncome }}</p>
+        <p><strong>Gross Annual Income:</strong> {{ selectedAccount.grossAnnualIncome }}</p>
+        <p><strong>Want Debit Card:</strong> {{ selectedAccount.wantDebitCard }}</p>
+        <p><strong>Opt for Net Banking:</strong> {{ selectedAccount.optForNetBanking }}</p>
+        <p><strong>Account Type:</strong> {{ selectedAccount.accountType }}</p>
+        <div class="d-flex">
+          <button class="btn btn-success me-2" (click)="onApprove(selectedAccount.accountId)">Approve</button>
+          <button class="btn btn-danger" (click)="onCancel(selectedAccount.accountId)">Cancel</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card my-4">
+      <div class="card-header">
+        <h4>Account Requests</h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Account Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let account of accounts; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ account.firstName }} {{ account.middleName }} {{ account.lastName }}</td>
+              <td>{{ account.accountNumber }}</td>
+              <td>
+                <button class="btn btn-info" (click)="onView(account)">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

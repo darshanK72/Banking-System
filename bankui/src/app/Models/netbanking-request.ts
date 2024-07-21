@@ -3,5 +3,5 @@ export interface NetBankingRequest {
     userId: number;
     userPassword: string;
     transactionPassword: string;
-    otp: number;
+    otp: string;
 }

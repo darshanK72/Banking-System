@@ -70,7 +70,6 @@ export class RegisterNetbankingComponent implements OnInit{
         }
       );
     } else {
-      // Mark all fields as touched to trigger validation messages
       Object.keys(this.registerForm.controls).forEach(key => {
         const control = this.registerForm.get(key);
         control!.markAsTouched();
