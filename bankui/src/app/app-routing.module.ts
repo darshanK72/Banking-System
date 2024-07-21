@@ -105,8 +105,8 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
     children: [
       { path: '', redirectTo: 'account-requests', pathMatch: 'full' },
-      { path: 'account-requests', component: AccountRequestsComponent },
-      { path: 'account-list', component: AccountListComponent },
+      { path: 'account-requests', component: AccountRequestsComponent,canActivate:[AuthGuard, AdminGuard] },
+      { path: 'account-list', component: AccountListComponent,canActivate:[AuthGuard, AdminGuard]},
     ],
   },
 ];
