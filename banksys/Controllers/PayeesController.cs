@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using banksys.Repositories;
 using banksys.DTO;
 using banksys.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace banksys.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "User, Admin")]
     public class PayeesController : ControllerBase
     {
         private readonly IPayeeService _payeeService;

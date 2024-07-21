@@ -13,6 +13,7 @@ namespace banksys.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "User, Admin")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;

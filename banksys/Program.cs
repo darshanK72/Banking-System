@@ -71,6 +71,7 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IPayeeService, PayeeService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddTransient<IAdminService, AdminService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 
 var app = builder.Build();

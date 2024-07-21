@@ -7,11 +7,13 @@ using banksys.Interfaces;
 using MimeKit;
 using MailKit.Net.Smtp;
 using banksys.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace banksys.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "User, Admin")]
     public class TransactionsController : ControllerBase
     {
         private readonly ITransactionService _transactionService;

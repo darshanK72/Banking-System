@@ -77,7 +77,7 @@ namespace banksys.DTO
 
         public int UserId { get; set; }
 
-        public int? OTP { get; set; }
+        public string? OTP { get; set; }
 
         [Required]
         [StringLength(50)]

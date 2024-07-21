@@ -12,7 +12,7 @@ using banksys.Models;
 namespace banksys.Migrations
 {
     [DbContext(typeof(BankSysDbContext))]
-    [Migration("20240721080944_init")]
+    [Migration("20240721173851_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -90,6 +90,9 @@ namespace banksys.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<string>("OTP")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("OccupationType")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -113,6 +116,9 @@ namespace banksys.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("TransactionPassword")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -245,9 +251,14 @@ namespace banksys.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("PayeeId");
 
                     b.HasIndex("PayeeAccountId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Payees");
                 });
@@ -270,6 +281,12 @@ namespace banksys.Migrations
 
                     b.Property<int>("FromAccountId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MaturityInstructions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -380,7 +397,13 @@ namespace banksys.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("banksys.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("PayeeAccount");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("banksys.Models.Transaction", b =>

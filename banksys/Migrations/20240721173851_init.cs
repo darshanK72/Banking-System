@@ -90,10 +90,12 @@ namespace banksys.Migrations
                     ResidentialAddressId = table.Column<int>(type: "int", nullable: false),
                     PermanentAddressId = table.Column<int>(type: "int", nullable: false),
                     OccupationType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TransactionPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SourceOfIncome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     GrossAnnualIncome = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     WantDebitCard = table.Column<bool>(type: "bit", nullable: false),
                     OptForNetBanking = table.Column<bool>(type: "bit", nullable: false),
+                    OTP = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -130,7 +132,8 @@ namespace banksys.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PayeeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PayeeAccountNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    PayeeAccountId = table.Column<int>(type: "int", nullable: false)
+                    PayeeAccountId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -141,6 +144,11 @@ namespace banksys.Migrations
                         principalTable: "Accounts",
                         principalColumn: "AccountId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payees_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -155,7 +163,9 @@ namespace banksys.Migrations
                     FromAccountId = table.Column<int>(type: "int", nullable: false),
                     ToAccountId = table.Column<int>(type: "int", nullable: false),
                     TransactionType = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Remark = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaturityInstructions = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,6 +203,11 @@ namespace banksys.Migrations
                 name: "IX_Payees_PayeeAccountId",
                 table: "Payees",
                 column: "PayeeAccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payees_UserId",
+                table: "Payees",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_FromAccountId",

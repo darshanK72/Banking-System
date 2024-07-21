@@ -87,8 +87,8 @@ namespace banksys.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("OTP")
-                        .HasColumnType("int");
+                    b.Property<string>("OTP")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OccupationType")
                         .IsRequired()
@@ -248,7 +248,7 @@ namespace banksys.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("PayeeId");
@@ -396,9 +396,7 @@ namespace banksys.Migrations
 
                     b.HasOne("banksys.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("PayeeAccount");
 

@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using banksys.DTO;
 using banksys.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace banksys.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "User, Admin")]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -95,13 +97,9 @@ namespace banksys.Controllers
                 var response = await _accountService.RegisterNetBankingAsync(request);
                 return Ok(response);
             }
-            catch (InvalidOperationException ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new MessageResponse { Message = ex.Message });
-            }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new MessageResponse { Message = "An unexpected error occurred while creating the account. Please try again later." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new MessageResponse { Message = ex.Message });
             }
         }
 

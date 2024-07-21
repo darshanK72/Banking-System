@@ -80,7 +80,7 @@ namespace banksys.Models
         public bool WantDebitCard { get; set; }
 
         public bool OptForNetBanking { get; set; }
-        public int? OTP { get; set; }
+        public string? OTP { get; set; }
 
         public bool IsApproved { get; set; }
 

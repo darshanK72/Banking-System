@@ -16,6 +16,6 @@ namespace banksys.Interfaces
         //Task<AccountStatementDTO> GetAccountStatementAsync(int accountId);
         //Task<bool> PerformTransactionAsync(TransactionRequestDTO transactionRequest);
         Task<MessageResponse> SendOtpToUserAsync(int userId);
-        Task<MessageResponse> RegisterNetBankingAsync(NetBankingRequest request);
+        Task<string> RegisterNetBankingAsync(NetBankingRequest request);
     }
 }

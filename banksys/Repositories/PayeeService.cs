@@ -63,7 +63,8 @@ namespace banksys.Repositories
 
         public async Task<string> CreatePayeeAsync(PayeeDTO payeeDTO)
         {
-            var account = _context.Accounts.Where(ac => ac.AccountNumber == payeeDTO.PayeeAccountNumber).FirstOrDefault();
+            var account = await _context.Accounts.Where(ac => ac.AccountNumber == payeeDTO.PayeeAccountNumber).FirstOrDefaultAsync();
+            var user = await _context.Users.Where(u => u.UserId == payeeDTO.UserId).FirstOrDefaultAsync();
             if(account == null)
             {
                 throw new Exception("Account Number not found");
@@ -74,7 +75,9 @@ namespace banksys.Repositories
                 PayeeName = payeeDTO.PayeeName,
                 PayeeAccountNumber = payeeDTO.PayeeAccountNumber,
                 PayeeAccountId = account.AccountId,
-                PayeeAccount = account
+                PayeeAccount = account,
+                UserId = payeeDTO.UserId,
+                User = user
             };
 
             _context.Payees.Add(payee);

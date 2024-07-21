@@ -15,5 +15,7 @@ namespace banksys.DTO
         public string PayeeAccountNumber { get; set; }
 
         public int PayeeAccountId { get; set; }
+
+        public int? UserId { get; set; }
     }
 }

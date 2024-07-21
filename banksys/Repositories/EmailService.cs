@@ -87,7 +87,7 @@ namespace banksys.Repository
 
         public async Task RequestOtpForUser(User user)
         {
-            int otp = GenerateOtp();
+            string otp = GenerateOtp();
 
             var account = await _context.Accounts.Where(ac => ac.UserId == user.UserId).FirstOrDefaultAsync();
 
@@ -99,7 +99,7 @@ namespace banksys.Repository
         }
 
 
-        public async Task NotifyOtp(string userEmail, int otp)
+        public async Task NotifyOtp(string userEmail, string otp)
         {
             string subject = "Your OTP Code";
             string body = $"<p>Dear User,</p><p>Your OTP code is: <strong>{otp}</strong></p>" +
@@ -110,15 +110,15 @@ namespace banksys.Repository
         }
 
 
-        private int GenerateOtp(int length = 6)
+        private string GenerateOtp(int length = 6)
         {
             var random = new Random();
             var otp = new StringBuilder();
             for (int i = 0; i < length; i++)
             {
-                otp.Append(random.Next(0, 10));
+                otp.Append(random.Next(1, 10));
             }
-            return Int32.Parse(otp.ToString());
+            return otp.ToString();
         }
 
     }

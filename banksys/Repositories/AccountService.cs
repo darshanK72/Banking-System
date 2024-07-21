@@ -254,7 +254,7 @@ namespace banksys.Repositories
 
         }
 
-        public async Task<MessageResponse> RegisterNetBankingAsync(NetBankingRequest request)
+        public async Task<string> RegisterNetBankingAsync(NetBankingRequest request)
         {
             var user = await _context.Users
             .Include(u => u.Accounts)
@@ -262,36 +262,25 @@ namespace banksys.Repositories
 
             if (user == null)
             {
-                return new MessageResponse()
-                {
-                    Message = "User not found."
-                };
+                throw new Exception("User not found");
             }
 
             var isPasswordValid = BCrypt.Net.BCrypt.Verify(request.UserPassword, user.Password);
             if (!isPasswordValid)
             {
-                return new MessageResponse()
-                {
-                    Message = "Invalid user password."
-                };
+                throw new Exception("Invalid user password");
             }
 
             var account = user.Accounts.FirstOrDefault(a => a.AccountNumber == request.AccountNumber);
             if (account == null)
             {
-                return new MessageResponse()
-                {
-                    Message = "Account number is incorrect."
-                };
+                throw new Exception("Account number is incorrect.");
+                
             }
 
             if (account.OTP != request.OTP)
             {
-                return new MessageResponse()
-                {
-                    Message = "Invalid OTP or Expired"
-                };
+                throw new Exception("Invlaid OTP");
 
             }
 
@@ -302,17 +291,11 @@ namespace banksys.Repositories
             try
             {
                 await _context.SaveChangesAsync();
-                return new MessageResponse()
-                {
-                    Message = "Net banking registration successful."
-                };
+                return "Net banking registration successful.";
             }
             catch (Exception ex)
             {
-                return new MessageResponse()
-                {
-                    Message = "An error occurred while registering for net banking."
-                };
+                throw new Exception("An error occurred while registering for net banking.");
             }
         }
         public async Task<bool> UpdateAccountAsync(AccountDTO accountDTO)
