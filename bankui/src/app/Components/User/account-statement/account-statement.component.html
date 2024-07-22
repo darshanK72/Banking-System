@@ -1,50 +1,96 @@
 <div>
-    <h4>Account Statements</h4>
-  
-    <!-- Button to view transaction details -->
-    <div *ngIf="selectedTransaction" class="mb-3">
-      <h5>Transaction Details</h5>
-      <div>
-        <p><strong>Date:</strong> {{ selectedTransaction.transactionDate | date: 'short' }}</p>
-        <p><strong>Description:</strong> {{ selectedTransaction.description }}</p>
-        <p><strong>Amount:</strong> {{ selectedTransaction.amount | currency }}</p>
-        <p><strong>Type:</strong> {{ selectedTransaction.transactionType }}</p>
-        <p><strong>Status:</strong> {{ selectedTransaction.status }}</p>
-        <p><strong>Remark:</strong> {{ selectedTransaction.remark }}</p>
-        <p><strong>Maturity Instructions:</strong> {{ selectedTransaction.maturityInstructions }}</p>
-      </div>
-    </div>
-  
-    <!-- Transaction Table -->
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Description</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Type</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let transaction of transactions">
-            <td>{{ transaction.transactionDate | date: 'short' }}</td>
-            <td>{{ transaction.description }}</td>
-            <td>{{ transaction.amount | currency }}</td>
-            <td>
-              <span [ngClass]="{'text-success': isIncoming(transaction), 'text-danger': !isIncoming(transaction)}">
-                {{ isIncoming(transaction) ? 'Incoming' : 'Outgoing' }}
-              </span>
-            </td>
-            <td>{{ transaction.status }}</td>
-            <td>
-              <button class="btn btn-info btn-sm" (click)="viewTransactionDetails(transaction)">View Details</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <h4>Account Statements</h4>
+
+  <!-- Button to view transaction details -->
+  <div *ngIf="selectedTransaction" class="mb-3">
+    <h5>Transaction Details</h5>
+    <div>
+      <p><strong>Date:</strong> {{ selectedTransaction.transactionDate | date: 'short' }}</p>
+      <p><strong>Description:</strong> {{ selectedTransaction.description }}</p>
+      <p><strong>Amount:</strong> {{ selectedTransaction.amount | currency }}</p>
+      <p><strong>Type:</strong> {{ selectedTransaction.transactionType }}</p>
+      <p><strong>Status:</strong> {{ selectedTransaction.status }}</p>
+      <p><strong>Remark:</strong> {{ selectedTransaction.remark }}</p>
+      <p><strong>Maturity Instructions:</strong> {{ selectedTransaction.maturityInstructions }}</p>
     </div>
   </div>
-  
+
+  <!-- Filter Form Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4>Filter Transactions</h4>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="applyFilters()" #filterForm="ngForm" class="row g-3">
+        <div class="col-md-2">
+          <label for="fromAccountNumber" class="form-label">From Account ID</label>
+          <input type="text" class="form-control" id="fromAccountNumber" name="fromAccountNumber"
+            [(ngModel)]="filterParams.fromAccountNumber">
+        </div>
+        <div class="col-md-2">
+          <label for="toAccountNumber" class="form-label">To Account ID</label>
+          <input type="text" class="form-control" id="toAccountId" name="toAccountNumber"
+            [(ngModel)]="filterParams.toAccountNumber">
+        </div>
+        <div class="col-md-2">
+          <label for="minAmount" class="form-label">Min Amount</label>
+          <input type="number" class="form-control" id="minAmount" name="minAmount"
+            [(ngModel)]="filterParams.minAmount">
+        </div>
+        <div class="col-md-2">
+          <label for="maxAmount" class="form-label">Max Amount</label>
+          <input type="number" class="form-control" id="maxAmount" name="maxAmount"
+            [(ngModel)]="filterParams.maxAmount">
+        </div>
+        <div class="col-md-2">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="filterParams.startDate">
+        </div>
+        <div class="col-md-2">
+          <label for="endDate" class="form-label">End Date</label>
+          <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="filterParams.endDate">
+        </div>
+        <div class="col-md-2">
+          <label for="status" class="form-label">Status</label>
+          <input type="text" class="form-control" id="status" name="status" [(ngModel)]="filterParams.status">
+        </div>
+        <div class="col-md-12 text-end">
+          <button type="submit" class="btn btn-primary">Apply Filters</button>
+          <button type="button" class="btn btn-secondary ms-2" (click)="resetFilters()">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Transaction Table -->
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Type</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.transactionDate | date: 'short' }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>{{ transaction.amount | currency }}</td>
+          <td>
+            <span [ngClass]="{'text-success': isIncoming(transaction), 'text-danger': !isIncoming(transaction)}">
+              {{ isIncoming(transaction) ? 'Incoming' : 'Outgoing' }}
+            </span>
+          </td>
+          <td>{{ transaction.status }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewTransactionDetails(transaction)">View Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

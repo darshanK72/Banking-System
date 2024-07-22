@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using banksys.Interfaces;
 using banksys.Models;
 using banksys.DTO;
+using Microsoft.IdentityModel.Tokens;
 
 public class TransactionService : ITransactionService
 {
@@ -55,6 +56,47 @@ public class TransactionService : ITransactionService
             Status = transaction.Status
         };
     }
+
+    public async Task<IEnumerable<TransactionDTO>> SearchTransactionsAsync(
+    string? fromAccountNumber, string? toAccountNumber, decimal? minAmount, decimal? maxAmount,
+    DateTime? startDate, DateTime? endDate, string? status)
+    {
+        var query = _context.Transactions.Include(t => t.FromAccount).Include(t => t.ToAccount).AsQueryable();
+
+        if (!fromAccountNumber.IsNullOrEmpty())
+            query = query.Where(t => t.FromAccount.AccountNumber == fromAccountNumber);
+
+        if (!toAccountNumber.IsNullOrEmpty())
+            query = query.Where(t => t.ToAccount.AccountNumber == toAccountNumber);
+
+        if (minAmount.HasValue)
+            query = query.Where(t => t.Amount >= minAmount);
+
+        if (maxAmount.HasValue)
+            query = query.Where(t => t.Amount <= maxAmount);
+
+        if (startDate.HasValue)
+            query = query.Where(t => t.TransactionDate >= startDate);
+
+        if (endDate.HasValue)
+            query = query.Where(t => t.TransactionDate <= endDate);
+
+        if (!string.IsNullOrEmpty(status))
+            query = query.Where(t => t.Status == status);
+
+        return query.Select(transaction => new TransactionDTO
+        {
+            TransactionId = transaction.TransactionId,
+            Amount = transaction.Amount,
+            Description = transaction.Description,
+            TransactionDate = transaction.TransactionDate,
+            FromAccountId = transaction.FromAccountId,
+            ToAccountId = transaction.ToAccountId,
+            TransactionType = transaction.TransactionType,
+            Status = transaction.Status
+        });
+    }
+
 
     public async Task<IEnumerable<TransactionDTO>> GetTransactionByUserIdAsync(int id)
     {

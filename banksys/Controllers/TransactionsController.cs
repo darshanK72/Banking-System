@@ -56,7 +56,20 @@ namespace banksys.Controllers
             return Ok(account);
         }
 
-
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<TransactionDTO>>> SearchTransactions(
+            [FromQuery] string? fromAccountNumber, 
+            [FromQuery] string? toAccountNumber,
+            [FromQuery] decimal? minAmount,
+            [FromQuery] decimal? maxAmount,
+            [FromQuery] DateTime? startDate,
+            [FromQuery] DateTime? endDate,
+            [FromQuery] string? status)
+        {
+            var transactions = await _transactionService.SearchTransactionsAsync(
+                fromAccountNumber, toAccountNumber, minAmount, maxAmount, startDate, endDate, status);
+            return Ok(transactions);
+        }
 
 
         [HttpPost("transfer")]

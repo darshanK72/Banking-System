@@ -15,6 +15,7 @@ export class AccountStatementComponent implements OnInit {
   transactions: Transaction[] = [];
   userId!: number;
   selectedTransaction?: Transaction;
+  filterParams: any = {};
 
   constructor(
     private accountService: AccountService,
@@ -45,6 +46,25 @@ export class AccountStatementComponent implements OnInit {
         console.error('Error loading transactions', error);
       }
     );
+  }
+
+  applyFilters(): void {
+    const { fromAccountNumber, toAccountNumber, minAmount, maxAmount, startDate, endDate, status } = this.filterParams;
+    this.transactionService.searchTransactions(
+      fromAccountNumber, toAccountNumber, minAmount, maxAmount, startDate, endDate, status
+    ).subscribe(
+      (filteredTransactions: Transaction[]) => {
+        this.transactions = filteredTransactions;
+      },
+      (error) => {
+        console.error('Error filtering transactions', error);
+      }
+    );
+  }
+
+  resetFilters(): void {
+    this.filterParams = {};
+    this.loadAccountSummary();
   }
 
   viewTransactionDetails(transaction: Transaction): void {
