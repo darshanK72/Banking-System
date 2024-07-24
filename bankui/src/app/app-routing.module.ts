@@ -60,7 +60,7 @@ const routes: Routes = [
       {
         path: 'create-account',
         component: CreateAccountComponent,
-        canActivate: [AuthGuard, UserGuard, AccountGuard],
+        canActivate: [AuthGuard, UserGuard],
       },
       {
         path: 'register-netbanking',
